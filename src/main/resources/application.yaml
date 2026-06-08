@@ -1,3 +1,41 @@
+server:
+  port: 8080
 spring:
   application:
-    name: ai
+    name: spring-ai-rag-stream-demo
+  ai:
+    openai:
+      api-key: sk-7RO6Lo2Nz2etsMxOs
+      base-url: https://cpa.earndollar.top
+      chat:
+        options:
+          model: gpt-5.5
+    vectorstore:
+      redis:
+        initialize-schema: true # 是否初始化所需的模式
+        index-name: lee-vectorstore # 用于存储向量的索引名称
+        prefix: 'lee:' # redis 键的前缀
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ai_chat?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: root
+  data:
+    redis:
+      client-type: jedis
+      host: 43.139.13.128
+      port: 6379
+      database: 0
+      password: 123456
+
+mybatis:
+  mapper-locations: classpath*:mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    root: info
+    saas.ai: debug
+  file:
+    name: logs/ai.log
